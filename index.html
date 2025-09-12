@@ -788,7 +788,66 @@ body:not([data-theme="light"]) {
             opacity: 1;
             transform: translateY(0);
         }
+/* =================================
+   FAQ Section Styles
+   ================================= */
+.faq-grid {
+    display: grid;
+    /* ডেক্সটপের জন্য ৩-কলাম লেআউট */
+    grid-template-columns: repeat(3, 1fr); 
+    gap: 30px; /* কার্ডগুলোর মধ্যে ফাঁকা জায়গা */
+}
 
+.faq-item h4 {
+    font-size: 1.25rem;
+    color: var(--text-primary); /* আপনার বিদ্যমান ভ্যারিয়েবল ব্যবহার করা হয়েছে */
+    margin-bottom: 15px;
+    font-weight: 600;
+}
+
+.faq-item p {
+    color: var(--text-secondary); /* আপনার বিদ্যমান ভ্যারিয়েবল ব্যবহার করা হয়েছে */
+    line-height: 1.6;
+}
+/* =================================
+   Certifications Section Styles (Final Clean Version)
+   ================================= */
+.certifications-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 30px;
+}
+
+.cert-link-wrapper {
+    text-decoration: none;
+    display: block;
+}
+
+.cert-card {
+    padding: 30px;
+    text-align: center;
+}
+
+.cert-card h3 {
+    font-size: 1.25rem;
+    color: var(--text-primary);
+    margin-bottom: 8px;
+}
+
+.cert-card p {
+    color: var(--text-secondary);
+    font-size: 0.95rem;
+}
+
+.cert-link-wrapper .glass-card {
+    transition: transform 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.cert-link-wrapper:hover .glass-card {
+    transform: translateY(-10px);
+    border-color: var(--accent);
+    box-shadow: 0 0 25px var(--accent-glow);
+}
         /* Responsive Design */
 @media (max-width: 768px) {
     .nav-links { 
@@ -947,9 +1006,103 @@ body:not([data-theme="light"]) {
     width: 0; /* অ্যানিমেশন শুরু হবে ০ থেকে */
     transition: width 1.5s ease-in-out; /* প্রস্থ পরিবর্তনের জন্য স্মুথ ট্রানজিশন */
 }
+/* =================================
+   Resume Preview Modal Styles
+   ================================= */
+.modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 2000; /* Ensure it's on top of everything */
+    display: none; /* Hidden by default */
+    justify-content: center;
+    align-items: center;
+}
 
+.modal.show {
+    display: flex; /* Show the modal */
+}
+
+.modal-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.6);
+    backdrop-filter: blur(5px);
+}
+
+.modal-content {
+    width: 90%;
+    max-width: 900px;
+    height: 90vh;
+    z-index: 2001;
+    display: flex;
+    flex-direction: column;
+    animation: fadeIn 0.3s ease-out;
+}
+
+.modal-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px 25px;
+    border-bottom: 1px solid var(--border-primary);
+}
+
+.modal-header h3 {
+    color: var(--text-primary);
+    margin: 0;
+}
+
+.close-btn {
+    background: none;
+    border: none;
+    font-size: 2.5rem;
+    color: var(--text-secondary);
+    cursor: pointer;
+    transition: color 0.3s ease;
+}
+
+.close-btn:hover {
+    color: var(--text-primary);
+}
+
+.modal-body {
+    flex-grow: 1; /* Take up all available space */
+    padding: 10px;
+}
+
+.modal-footer {
+    padding: 15px 25px;
+    border-top: 1px solid var(--border-primary);
+    text-align: right;
+}
+
+.modal-footer .btn {
+    margin-left: 15px;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: scale(0.95);
+    }
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
 /* মোবাইল ডিভাইসে প্রজেক্ট ফিল্টার বাটনগুলোকে রেসপন্সিভ করার জন্য */
 @media (max-width: 768px) {
+    /* FAQ section responsive styles */
+.faq-grid {
+    grid-template-columns: 1fr; /* মোবাইল ভিউতে একটি কলাম */
+}
+    
     .project-filter-buttons {
         flex-wrap: wrap; /* বাটনগুলো জায়গা না পেলে নিচের লাইনে চলে আসবে */
         justify-content: center;
@@ -969,11 +1122,12 @@ body:not([data-theme="light"]) {
         <div class="container">
             <nav>
                 <div class="logo">Rabbi<span>TheAnalyst</span></div>
-                <ul class="nav-links">
+<ul class="nav-links">
     <li><a href="#about">About</a></li>
     <li><a href="#skills">Skills</a></li>
     <li><a href="#projects">Projects</a></li>
     <li><a href="#insights">Insights</a></li>
+    <li><a href="#faq">FAQ</a></li> 
     <li><a href="#contact">Contact</a></li>
 </ul>
                 <div class="menu-toggle">
@@ -1013,8 +1167,7 @@ body:not([data-theme="light"]) {
                        <img src="images/rabbi.jpg" alt="A photo of Md. Rabbi Ali" loading="lazy">
                     </div>
                 </div>
-                <a href="Rabbi_Ali_Resume.pdf" class="btn" style="margin-top: 20px;" download>Download My Resume</a>
-
+                <button id="viewResumeBtn" class="btn" style="margin-top: 20px;">View My Resume</button>
                 <div class="stats-grid">
                     <div class="stat-item">
                         <h3 class="stat-number">18+</h3>
@@ -1206,7 +1359,58 @@ body:not([data-theme="light"]) {
     </div>
 </div>
         </section>
+<section id="certifications" class="certifications">
+    <div class="container reveal">
+        <div class="section-title">
+            <h2>Achievements & Certifications</h2>
+        </div>
+        <div class="certifications-grid">
 
+            <a href="https://coursera.org/verify/professional-cert/DPLGX1488P99" target="_blank" class="cert-link-wrapper">
+                <div class="cert-card glass-card">
+                    <h3>IBM Data Analyst Professional Certificate</h3>
+                    <p>Coursera</p>
+                </div>
+            </a>
+
+            <a href="https://github.com/RabbiTheAnalyst/Certificates/blob/main/Alison_Certificate-3876-45694989.pdf" target="_blank" class="cert-link-wrapper">
+                <div class="cert-card glass-card">
+                    <h3>Master Microsoft Power BI</h3>
+                    <p>Alison</p>
+                </div>
+            </a>
+
+            <a href="https://courses.cognitiveclass.ai/certificates/ec0db25f1c9f4e7585a292382ab09efd" target="_blank" class="cert-link-wrapper">
+                <div class="cert-card glass-card">
+                    <h3>Data Analysis with Python</h3>
+                    <p>IBM Cognitive Class</p>
+                </div>
+            </a>
+
+            <a href="https://certificates.simplicdn.net/share/7879958_81735291747.pdf" target="_blank" class="cert-link-wrapper">
+                <div class="cert-card glass-card">
+                    <h3>Business Analytics with Excel</h3>
+                    <p>Simplilearn</p>
+                </div>
+            </a>
+
+            <a href="https://coursera.org/verify/3S310N38N27N" target="_blank" class="cert-link-wrapper">
+                <div class="cert-card glass-card">
+                    <h3>Programming for Everybody (Python)</h3>
+                    <p>University of Michigan</p>
+                </div>
+            </a>
+
+            <a href="https://www.life-global.org/certificate/b93b6fba-a924-4657-9dda-7e10b2962948" target="_blank" class="cert-link-wrapper">
+                <div class="cert-card glass-card">
+                    <h3>AI for Beginners</h3>
+                    <p>HP Life Global</p>
+                </div>
+            </a>
+
+        </div>
+    </div>
+</section>
         <section id="projects" class="projects">
             <div class="container reveal">
                 <div class="section-title"><h2>My Projects</h2></div>
@@ -1462,6 +1666,27 @@ body:not([data-theme="light"]) {
                     </div>
                 </div>
             </div>
+            <section id="faq" class="faq">
+    <div class="container reveal">
+        <div class="section-title">
+            <h2>Frequently Asked Questions</h2>
+        </div>
+        <div class="faq-grid">
+            <div class="faq-item glass-card">
+                <h4>What services do you provide?</h4>
+                <p>Data analysis, dashboard building, predictive modeling, and data-driven decision support.</p>
+            </div>
+            <div class="faq-item glass-card">
+                <h4>Are you available for freelance?</h4>
+                <p>Yes — freelance, consulting, and full-time roles.</p>
+            </div>
+            <div class="faq-item glass-card">
+                <h4>Which tools do you use?</h4>
+                <p>Excel, SQL, Power BI, Python, and LaTeX for reports.</p>
+            </div>
+        </div>
+    </div>
+</section>
         <section id="contact" class="contact">
     <div class="container reveal">
         <div class="section-title"><h2>Contact Me</h2></div>
@@ -1501,6 +1726,22 @@ body:not([data-theme="light"]) {
             <p>&copy; 2025 RabbiTheAnalyst. All rights reserved.</p>
         </div>
     </footer>
+    <div id="resumeModal" class="modal">
+    <div class="modal-overlay"></div>
+    <div class="modal-content glass-card">
+        <div class="modal-header">
+            <h3>My Resume</h3>
+            <button class="close-btn">&times;</button>
+        </div>
+        <div class="modal-body">
+            <iframe id="resumeFrame" src="" width="100%" height="100%" frameborder="0"></iframe>
+        </div>
+        <div class="modal-footer">
+            <button id="printResumeBtn" class="btn">Print</button>
+            <a href="Rabbi_Ali_Resume.pdf" class="btn" download>Download</a>
+        </div>
+    </div>
+</div>
     <div id="notification-container"></div>
     <script>
     // ============== COMBINED SCRIPT FOR ALL ANIMATIONS (FINAL WITH ENHANCED VALIDATION) ==============
@@ -1769,6 +2010,53 @@ function showNotification(message, type) {
     }, { threshold: 0.1 });
     const elementsToReveal = document.querySelectorAll('.reveal');
     elementsToReveal.forEach((el) => mainObserver.observe(el));
+</script>
+<script>
+    document.addEventListener('DOMContentLoaded', () => {
+        const viewResumeBtn = document.getElementById('viewResumeBtn');
+        const resumeModal = document.getElementById('resumeModal');
+        const closeModalBtn = resumeModal.querySelector('.close-btn');
+        const modalOverlay = resumeModal.querySelector('.modal-overlay');
+        const resumeFrame = document.getElementById('resumeFrame');
+        const printResumeBtn = document.getElementById('printResumeBtn');
+        
+        const resumePath = 'Rabbi_Ali_Resume.pdf'; // Your resume file name here
+
+        // Function to open the modal
+        const openModal = () => {
+            if (resumeFrame.src !== resumePath) {
+                resumeFrame.src = resumePath;
+            }
+            resumeModal.classList.add('show');
+        };
+
+        // Function to close the modal
+        const closeModal = () => {
+            resumeModal.classList.remove('show');
+        };
+
+        // Event listeners
+        viewResumeBtn.addEventListener('click', openModal);
+        closeModalBtn.addEventListener('click', closeModal);
+        modalOverlay.addEventListener('click', closeModal);
+
+        // Print functionality
+        printResumeBtn.addEventListener('click', () => {
+            try {
+                resumeFrame.contentWindow.print();
+            } catch (error) {
+                alert("Could not print the resume. Please try downloading it instead.");
+                console.error("Print error:", error);
+            }
+        });
+
+        // Close modal with Escape key
+        document.addEventListener('keydown', (event) => {
+            if (event.key === 'Escape' && resumeModal.classList.contains('show')) {
+                closeModal();
+            }
+        });
+    });
 </script>
 </body>
 </html>
