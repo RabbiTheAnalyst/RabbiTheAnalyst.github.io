@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Rabbi | Data Analyst Portfolio</title>
+    <title>Rabbi | RabbiTheAnalyst Portfolio</title>
     <script src="https://unpkg.com/lucide@latest"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -137,7 +137,7 @@ body:not([data-theme="light"]) {
         header {
             background-color: rgba(13, 17, 23, 0.7);
             backdrop-filter: blur(10px);
-            padding: 20px 0;
+            padding: 10px 0;
             position: fixed;
             width: 100%;
             top: 0;
@@ -1115,13 +1115,76 @@ body:not([data-theme="light"]) {
         padding: 8px 16px; /* বাটনের প্যাডিং কমানো */
     }
 }
+/* =================================
+   Preloader & Logo Animation Styles
+   ================================= */
+#preloader {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 9999; /* Ensures it's on top of everything */
+    background-color: var(--bg-dark); /* Matches your site's dark theme background */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    /* Smooth fade-out transition */
+    transition: opacity 0.75s ease, visibility 0.75s ease;
+}
+
+#preloader img {
+    max-height: 1000px; /* লোগোর সাইজ */
+    width: auto;
+    /* অ্যানিমেশনটি এখানে প্রয়োগ করা হলো */
+    animation: pulse 2s ease-in-out infinite;
+}
+
+/* Preloader Hidden State */
+#preloader.hidden {
+    opacity: 0;
+    visibility: hidden;
+}
+
+/* Keyframes for the pulsing animation */
+@keyframes pulse {
+    0% {
+        transform: scale(1);
+        opacity: 1;
+    }
+    50% {
+        transform: scale(1.05); /* হালকা বড় হবে */
+        opacity: 0.7; /* কিছুটা স্বচ্ছ হবে */
+    }
+    100% {
+        transform: scale(1);
+        opacity: 1;
+    }
+}
+/* === Logo Image Styling === */
+.logo-link {
+    display: flex; /* Helps with vertical alignment */
+    align-items: center;
+    text-decoration: none; /* Removes underline from the link */
+}
+
+#logoImage {
+    height: 60px; /* height এর পরিবর্তে max-height ব্যবহার করুন */
+    width: auto;  
+    transition: all 0.3s ease;
+}
     </style>
 </head>
 <body data-theme="dark">
+    <div id="preloader">
+    <img src="images/logo-dark1.png" alt="Rabbi The Analyst Logo Loading...">
+</div>
     <header>
         <div class="container">
             <nav>
-                <div class="logo">Rabbi<span>TheAnalyst</span></div>
+                <a href="#" class="logo-link">
+    <img id="logoImage" src="images/logo-dark1.png" alt="Rabbi The Analyst Logo">
+</a>
 <ul class="nav-links">
     <li><a href="#about">About</a></li>
     <li><a href="#skills">Skills</a></li>
@@ -2010,8 +2073,17 @@ function showNotification(message, type) {
     }, { threshold: 0.1 });
     const elementsToReveal = document.querySelectorAll('.reveal');
     elementsToReveal.forEach((el) => mainObserver.observe(el));
-</script>
-<script>
+// --- Preloader Hiding Script ---
+window.addEventListener('load', () => {
+    const preloader = document.getElementById('preloader');
+    // Add a small delay for a better feel, then hide
+    setTimeout(() => {
+        if (preloader) {
+            preloader.classList.add('hidden');
+        }
+    }, 200); // 200ms delay
+});
+
     document.addEventListener('DOMContentLoaded', () => {
         const viewResumeBtn = document.getElementById('viewResumeBtn');
         const resumeModal = document.getElementById('resumeModal');
