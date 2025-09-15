@@ -1395,51 +1395,122 @@
             padding: 8px 16px;
         }
     }
-    /* === Floating Social Bar CSS === */
+    /* ✅✅✅ নিচের সম্পূর্ণ CSS কোডটুকু দিয়ে পুরনোটি পরিবর্তন করুন ✅✅✅ */
+
+/* === Floating Social Bar CSS (Upgraded with Animations) === */
 .floating-social-bar {
-    position: fixed; /* এটি স্ক্রিনে এক জায়গায় স্থির থাকবে */
-    top: 50%; /* উপর থেকে মাঝখানে */
-    right: 0; /* ডান দিকে */
-    transform: translateY(-50%); /* ভার্টিক্যালি একদম মাঝখানে আনার জন্য */
+    position: fixed;
+    top: 50%;
+    right: 0;
+    transform: translateY(-50%);
     background: var(--bg-secondary);
     backdrop-filter: blur(12px);
     border: 1px solid var(--border-primary);
-    border-right: none; /* ডান দিকের বর্ডার থাকবে না */
+    border-right: none;
     padding: 15px 10px;
-    border-radius: 20px 0 0 20px; /* শুধু বাম দিকে রাউন্ডেড হবে */
+    border-radius: 20px 0 0 20px;
     display: flex;
-    flex-direction: column; /* আইকনগুলো উপরে-নিচে সাজানো থাকবে */
-    gap: 20px; /* আইকনগুলোর মধ্যে ফাঁকা জায়গা */
+    flex-direction: column;
+    gap: 15px; /* গ্যাপ সামান্য কমানো হলো */
     z-index: 999;
     box-shadow: -5px 0px 15px rgba(0,0,0,0.1);
 }
 
-.floating-social-bar a {
-    color: var(--text-secondary);
-    transition: all 0.3s ease;
+/* ✅✅✅ আইকনের পুরনো সব CSS মুছে নিচের নতুন কোডটুকু বসান ✅✅✅ */
+
+/* --- Icon Link Styling (New Reliable Code) --- */
+
+/* আইকন লিংকগুলোর সাধারণ অবস্থা */
+.floating-social-bar a:not(.contact-link) {
+    position: relative; /* অ্যানিমেশনের জন্য আবশ্যক */
+    z-index: 1; /* অন্যান্য এলিমেন্টের উপরে রাখার জন্য */
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--text-secondary); /* সাধারণ রঙ ধূসর */
+    transition: color 0.4s ease; /* শুধু রঙের জন্য ট্রানজিশন */
+    overflow: hidden; /* অ্যানিমেশনকে কন্টেইনারের বাইরে যেতে দেবে না */
 }
 
-.floating-social-bar a:hover {
-    color: var(--accent);
-    transform: scale(1.2);
+/* ব্যাকগ্রাউন্ড সার্কেল, যা আইকনের পেছনে থাকবে */
+.floating-social-bar a:not(.contact-link)::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: var(--accent);
+    border-radius: 50%;
+    transform: scale(0); /* প্রাথমিকভাবে সাইজ ০ থাকবে */
+    transition: transform 0.4s cubic-bezier(0.45, 0, 0.55, 1); /* সুন্দর বাউন্সি অ্যানিমেশন */
+    z-index: -1; /* এই লাইনটি সার্কেলকে আইকনের পেছনে পাঠাবে */
 }
 
+/* হোভার করলে সার্কেল বড় হবে এবং আইকনের রঙ সাদা হবে */
+.floating-social-bar a:not(.contact-link):hover {
+    color: var(--text-primary); /* আইকনের রঙ সাদা হবে */
+}
+
+.floating-social-bar a:not(.contact-link):hover::before {
+    transform: scale(1); /* সার্কেলটি বড় হবে */
+}
+
+
+/* --- Contact Link Styling --- */
 .floating-social-bar .contact-link {
-    writing-mode: vertical-rl; /* লেখাকে উলম্বভাবে দেখানোর জন্য */
+    position: relative; /* অ্যানিমেশনের জন্য জরুরি */
+    writing-mode: vertical-rl;
     transform: rotate(180deg);
     font-weight: 600;
     text-decoration: none;
     text-transform: uppercase;
     font-size: 0.9rem;
     letter-spacing: 1px;
-    padding-top: 15px;
+    padding: 15px 5px; /* প্যাডিং পরিবর্তন করা হলো */
     border-top: 1px solid var(--border-primary);
+    color: var(--text-secondary);
+    transition: color 0.4s ease 0.1s; /* রঙ পরিবর্তনে সামান্য দেরি হবে */
+    overflow: hidden; /* ব্যাকগ্রাউন্ডকে সীমার বাইরে যেতে দেবে না */
 }
+
+/* Contact লেখার টেক্সটকে ব্যাকগ্রাউন্ডের উপরে রাখার জন্য */
+.floating-social-bar .contact-link span {
+    position: relative;
+    z-index: 2;
+}
+
+/* হোভারের জন্য ব্যাকগ্রাউন্ড, যা প্রাথমিকভাবে নিচে লুকানো থাকবে */
+.floating-social-bar .contact-link::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: var(--accent);
+    z-index: 1;
+    transform: translateY(100%); /* প্রাথমিকভাবে নিচে থাকবে */
+    transition: transform 0.4s cubic-bezier(0.45, 0, 0.55, 1);
+}
+
+/* হোভার করলে ব্যাকগ্রাউন্ড স্লাইড হয়ে আসবে এবং লেখার রঙ পরিবর্তন হবে */
+.floating-social-bar .contact-link:hover::before {
+    transform: translateY(0); /* ব্যাকগ্রাউন্ড উপরে উঠে আসবে */
+}
+
+.floating-social-bar .contact-link:hover {
+    color: var(--text-primary); /* লেখার রঙ সাদা হবে */
+}
+
 
 /* === Mobile Responsive CSS === */
 @media (max-width: 768px) {
     .floating-social-bar {
-        display: none; /* মোবাইল স্ক্রিনে বারটি লুকিয়ে যাবে */
+        display: none;
     }
 }
 </style>
@@ -1762,7 +1833,7 @@
 </div>
                     <div class="project-card glass-card"data-category="power-bi excel">
     <div class="project-img">
-        <img src="images/IPL-Dashboard2.png" alt="Screenshot of a Power BI dashboard showing IPL cricket statistics with player photos and charts."" loading="lazy" style="width:100%; height:100%; object-fit: cover;">
+        <img src="images/IPL-Dashboard2.png" alt="Screenshot of a Power BI dashboard showing IPL cricket statistics with player photos and charts." loading="lazy" style="width:100%; height:100%; object-fit: cover;">
     </div>
     <div class="project-content">
         <h3>Interactive IPL Cricket Performance Analysis Dashboard (2021-2023)</h3>
