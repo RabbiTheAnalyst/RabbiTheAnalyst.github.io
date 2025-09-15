@@ -387,22 +387,46 @@
         color: var(--text-primary);
     }
 
-    .about-image img {
-        width: 300px;
-        height: 300px;
-        object-fit: cover;
-        object-position: top;
-        border-radius: 50%;
-        border: 5px solid var(--border-primary);
-        box-shadow: 0 0 40px rgba(0, 0, 0, 0.2);
-        transition: all 0.5s ease;
-    }
+    /* ✅✅✅ নিচের সম্পূর্ণ নতুন কোডটি দিয়ে পুরনোটি পরিবর্তন করুন ✅✅✅ */
 
-    .about-image img:hover {
-        transform: scale(1.05);
-        border-color: var(--accent);
-    }
+/* ছবির কন্টেইনারটিকে এখন আমরা মূল বর্ডার হিসেবে ডিজাইন করব */
+.about-image {
+    position: relative;
+    width: 300px; /* আপনার ছবির সাইজ */
+    height: 300px; /* আপনার ছবির সাইজ */
+    border-radius: 50%; /* কন্টেইনারকে গোলাকার করা হলো */
+    padding: 5px; /* বর্ডারের পুরুত্ব */
+    box-shadow: 0 0 40px rgba(0, 0, 0, 0.2);
+    transition: all 0.5s ease;
 
+    /* নতুন গ্রেডিয়েন্ট ব্যাকগ্রাউন্ড এবং অ্যানিমেশন */
+    background: linear-gradient(45deg, var(--gradient-start), var(--accent), var(--gradient-start));
+    background-size: 400% 400%;
+    animation: glowing-border 4s ease infinite;
+}
+
+/* হোভার ইফেক্টটি এখন কন্টেইনারে থাকবে */
+.about-image:hover {
+    transform: scale(1.05);
+    box-shadow: 0 0 50px var(--accent-glow);
+}
+
+/* ভেতরের ছবির স্টাইল পরিবর্তন করা হলো */
+.about-image img {
+    width: 100%; /* কন্টেইনারের সম্পূর্ণ জায়গা নেবে */
+    height: 100%; /* কন্টেইনারের সম্পূর্ণ জায়গা নেবে */
+    object-fit: cover;
+    object-position: top;
+    border-radius: 50%;
+    border: 3px solid var(--bg-dark); /* ছবির চারপাশে একটি হালকা বর্ডার, যা ব্যাকগ্রাউন্ডের সাথে মিশে যাবে */
+}
+
+/* গ্রেডিয়েন্ট বর্ডারের অ্যানিমেশন */
+@keyframes glowing-border {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+}
     .stats-grid {
         display: flex;
         justify-content: space-around;
@@ -1509,9 +1533,62 @@
 
 /* === Mobile Responsive CSS === */
 @media (max-width: 768px) {
+    .hero .btn {
+        margin-top: 30px; /* ২০px থেকে বাড়িয়ে ৩০px বা ৪০px করো */
+    }
+
     .floating-social-bar {
         display: none;
     }
+}
+
+/* ✅✅✅ নিচের সম্পূর্ণ CSS কোডটুকু যোগ করুন ✅✅✅ */
+
+/* ✅✅✅ নিচের নতুন এবং সম্পূর্ণ কোডটি দিয়ে পুরনোটি পরিবর্তন করুন ✅✅✅ */
+
+/* === Project Card Category Tag (Hover Effect) === */
+
+/* ছবির কন্টেইনার */
+.project-img {
+    position: relative;
+    overflow: hidden; /* অ্যানিমেশনকে সুন্দর দেখানোর জন্য */
+}
+
+/* ট্যাগ এবং ট্যাগ কন্টেইনারের সাধারণ অবস্থা (লুকানো) */
+.project-category-tag,
+.project-tags-container {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    
+    opacity: 0; /* প্রাথমিকভাবে স্বচ্ছ বা অদৃশ্য থাকবে */
+    transform: translateY(-15px); /* প্রাথমিকভাবে কিছুটা উপরে থাকবে */
+    transition: all 0.3s ease-out; /* মসৃণ অ্যানিমেশনের জন্য */
+}
+
+/* ছবির উপর মাউস নিয়ে গেলে (হোভার করলে) ট্যাগগুলো দেখা যাবে */
+.project-img:hover .project-category-tag,
+.project-img:hover .project-tags-container {
+    opacity: 1; /* দৃশ্যমান হবে */
+    transform: translateY(0); /* নিজের সঠিক জায়গায় চলে আসবে */
+}
+
+/* ট্যাগের মূল ডিজাইন (আগের মতোই) */
+.project-category-tag {
+    padding: 6px 15px;
+    background: linear-gradient(90deg, #ff9966, #ff5e62);
+    color: white;
+    font-size: 0.85rem;
+    font-weight: 600;
+    border-radius: 50px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+/* একাধিক ট্যাগের কন্টেইনার (আগের মতোই) */
+.project-tags-container {
+    display: flex;
+    gap: 8px;
 }
 </style>
 </head>
@@ -1577,7 +1654,7 @@
                         <p class="stat-label">Projects</p>
                     </div>
                     <div class="stat-item">
-                        <h3 class="stat-number">7</h3>
+                        <h3 class="stat-number">8</h3>
                         <p class="stat-label">Certificates</p>
                     </div>
                     <div class="stat-item">
@@ -1585,7 +1662,7 @@
                         <p class="stat-label">Tools</p>
                     </div>
                     <div class="stat-item">
-                        <h3 class="stat-number">9</h3>
+                        <h3 class="stat-number">15+</h3>
                         <p class="stat-label">Dashboards</p>
                     </div>
                 </div>
@@ -1728,66 +1805,111 @@
         </div>
         <div class="swiper-container mySwiper">
             <div class="swiper-wrapper">
+
                 <div class="swiper-slide">
                     <div class="course-card glass-card">
                         <div class="course-banner"><img src="images/IBM Data Analyst.png" alt="IBM Certificate Banner"><span class="course-tag premium">Professional</span></div>
                         <div class="course-content">
-                            <div class="course-meta"><span><i-lucide name="book-open-check"></i-lucide> 9 Courses</span><span><i-lucide name="award"></i-lucide> Certificate</span></div>
+                            <div class="course-meta"><span><i data-lucide="book-open-check"></i> 9 Courses</span><span><i data-lucide="award"></i> Certificate</span></div>
                             <h3>IBM Data Analyst Professional Certificate</h3>
-                            <a href="https://coursera.org/verify/professional-cert/DPLGX1488P99" target="_blank" class="btn course-btn">View Certificate <i-lucide name="arrow-right"></i-lucide></a>
+                            <a href="https://coursera.org/verify/professional-cert/DPLGX1488P99" target="_blank" rel="noopener noreferrer" class="btn course-btn">View Certificate <i data-lucide="arrow-right"></i></a>
                         </div>
                     </div>
                 </div>
+
                 <div class="swiper-slide">
                     <div class="course-card glass-card">
                         <div class="course-banner"><img src="images/Power BI.png" alt="Power BI Certificate Banner"><span class="course-tag upcoming">Specialization</span></div>
                         <div class="course-content">
-                            <div class="course-meta"><span><i-lucide name="book-open-check"></i-lucide> 15 Modules</span><span><i-lucide name="award"></i-lucide> Certificate</span></div>
+                            <div class="course-meta"><span><i data-lucide="book-open-check"></i> 15 Modules</span><span><i data-lucide="award"></i> Certificate</span></div>
                             <h3>Master Microsoft Power BI</h3>
-                            <a href="https://github.com/RabbiTheAnalyst/Certificates/blob/main/Alison_Certificate-3876-45694989.pdf" target="_blank" class="btn course-btn">View Certificate <i-lucide name="arrow-right"></i-lucide></a>
+                            <a href="https://github.com/RabbiTheAnalyst/Certificates/blob/main/Alison_Certificate-3876-45694989.pdf" target="_blank" rel="noopener noreferrer" class="btn course-btn">View Certificate <i data-lucide="arrow-right"></i></a>
                         </div>
                     </div>
                 </div>
+
                 <div class="swiper-slide">
                     <div class="course-card glass-card">
                         <div class="course-banner"><img src="images/Data Analysis with Python.png" alt="Python Certificate Banner"><span class="course-tag premium">Core Skill</span></div>
                         <div class="course-content">
-                            <div class="course-meta"><span><i-lucide name="book-open-check"></i-lucide> 6 Modules</span><span><i-lucide name="award"></i-lucide> Certificate</span></div>
+                            <div class="course-meta"><span><i data-lucide="book-open-check"></i> 6 Modules</span><span><i data-lucide="award"></i> Certificate</span></div>
                             <h3>Data Analysis with Python</h3>
-                            <a href="https://courses.cognitiveclass.ai/certificates/ec0db25f1c9f4e7585a292382ab09efd" target="_blank" class="btn course-btn">View Certificate <i-lucide name="arrow-right"></i-lucide></a>
+                            <a href="https://courses.cognitiveclass.ai/certificates/ec0db25f1c9f4e7585a292382ab09efd" target="_blank" rel="noopener noreferrer" class="btn course-btn">View Certificate <i data-lucide="arrow-right"></i></a>
                         </div>
                     </div>
                 </div>
+
                 <div class="swiper-slide">
                     <div class="course-card glass-card">
                         <div class="course-banner"><img src="images/Excel Simplilearn.png" alt="Excel Certificate Banner"><span class="course-tag upcoming">Foundation</span></div>
                         <div class="course-content">
-                            <div class="course-meta"><span><i-lucide name="book-open-check"></i-lucide> 10+ Hours</span><span><i-lucide name="award"></i-lucide> Certificate</span></div>
+                            <div class="course-meta"><span><i data-lucide="book-open-check"></i> 10+ Hours</span><span><i data-lucide="award"></i> Certificate</span></div>
                             <h3>Business Analytics with Excel</h3>
-                            <a href="https://github.com/RabbiTheAnalyst/Certificates/blob/main/Business%20Analytics%20with%20Excel%20-%20Certificate.pdf" target="_blank" class="btn course-btn">View Certificate <i-lucide name="arrow-right"></i-lucide></a>
+                            <a href="https://github.com/RabbiTheAnalyst/Certificates/blob/main/Business%20Analytics%20with%20Excel%20-%20Certificate.pdf" target="_blank" rel="noopener noreferrer" class="btn course-btn">View Certificate <i data-lucide="arrow-right"></i></a>
                         </div>
                     </div>
                 </div>
+
                 <div class="swiper-slide">
                     <div class="course-card glass-card">
                         <div class="course-banner"><img src="images/Python_Michigan University.png" alt="Python for Everybody Banner"><span class="course-tag premium">University</span></div>
                         <div class="course-content">
-                            <div class="course-meta"><span><i-lucide name="book-open-check"></i-lucide> 5 Courses</span><span><i-lucide name="award"></i-lucide> Certificate</span></div>
+                            <div class="course-meta"><span><i data-lucide="book-open-check"></i> 7 Modules</span><span><i data-lucide="award"></i> Certificate</span></div>
                             <h3>Programming for Everybody (Python)</h3>
-                            <a href="https://coursera.org/verify/3S310N38N27N" target="_blank" class="btn course-btn">View Certificate <i-lucide name="arrow-right"></i-lucide></a>
+                            <a href="https://coursera.org/verify/3S310N38N27N" target="_blank" rel="noopener noreferrer" class="btn course-btn">View Certificate <i data-lucide="arrow-right"></i></a>
                         </div>
                     </div>
                 </div>
+
                 <div class="swiper-slide">
                     <div class="course-card glass-card">
                         <div class="course-banner"><img src="images/AI HP.png" alt="AI for Beginners Banner"><span class="course-tag upcoming">Introductory</span></div>
                         <div class="course-content">
-                            <div class="course-meta"><span><i-lucide name="book-open-check"></i-lucide> 4 Modules</span><span><i-lucide name="award"></i-lucide> Certificate</span></div>
+                            <div class="course-meta"><span><i data-lucide="book-open-check"></i> 4 Modules</span><span><i data-lucide="award"></i> Certificate</span></div>
                             <h3>AI for Beginners</h3>
-                            <a href="https://www.life-global.org/certificate/b93b6fba-a924-4657-9dda-7e10b2962948" target="_blank" class="btn course-btn">View Certificate <i-lucide name="arrow-right"></i-lucide></a>
+                            <a href="https://www.life-global.org/certificate/b93b6fba-a924-4657-9dda-7e10b2962948" target="_blank" rel="noopener noreferrer" class="btn course-btn">View Certificate <i data-lucide="arrow-right"></i></a>
                         </div>
                     </div>
                 </div>
+                
+                <div class="swiper-slide">
+                    <div class="course-card glass-card">
+                        <div class="course-banner">
+                            <img src="images/canva.png" alt="Canva for Presentations Certificate Banner">
+                            <span class="course-tag premium">Professional Skill</span>
+                        </div>
+                        <div class="course-content">
+                            <div class="course-meta">
+                                <span><i data-lucide="award"></i> Grameenphone Academy</span>
+                                <span><i data-lucide="shield-check"></i> Certificate</span>
+                            </div>
+                            <h3>Canva for Presentations</h3>
+                            <a href="https://github.com/RabbiTheAnalyst/Certificates/blob/main/Canva%20Certificate.pdf" target="_blank" rel="noopener noreferrer" class="btn course-btn">
+                                View Certificate <i data-lucide="arrow-right"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="swiper-slide">
+                    <div class="course-card glass-card">
+                        <div class="course-banner">
+                            <img src="images/futurenation.png" alt="Data Analysis with Excel Certificate Banner">
+                            <span class="course-tag premium">Core Skill</span>
+                        </div>
+                        <div class="course-content">
+                            <div class="course-meta">
+                                <span><i data-lucide="award"></i> FutureNation</span>
+                                <span><i data-lucide="shield-check"></i> Certificate</span>
+                            </div>
+                            <h3>Data Analysis with Excel</h3>
+                            <a href="https://github.com/RabbiTheAnalyst/Certificates/blob/main/Data%20Analysis%20with%20Excel-CERTIFICATE.pdf" target="_blank" rel="noopener noreferrer" class="btn course-btn">
+                                View Certificate <i data-lucide="arrow-right"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
             </div>
             <div class="swiper-pagination"></div>
             <div class="swiper-button-next"></div>
@@ -1808,6 +1930,7 @@
                     <div class="project-card glass-card"data-category="python excel">
     <div class="project-img">
         <img src="images/Climate.png" alt="Climate Change Analysis Bangladesh" loading="lazy" decoding="async"style="width:100%; height:100%; object-fit: cover;">
+    <span class="project-category-tag">Python</span>
     </div>
     <div class="project-content">
         <h3>Climate Change and Its Impact on Bangladesh</h3>
@@ -1834,6 +1957,7 @@
                     <div class="project-card glass-card"data-category="power-bi excel">
     <div class="project-img">
         <img src="images/IPL-Dashboard2.png" alt="Screenshot of a Power BI dashboard showing IPL cricket statistics with player photos and charts." loading="lazy" style="width:100%; height:100%; object-fit: cover;">
+        <span class="project-category-tag"> Power BI and Excel</span>
     </div>
     <div class="project-content">
         <h3>Interactive IPL Cricket Performance Analysis Dashboard (2021-2023)</h3>
@@ -1873,6 +1997,7 @@
             <div class="project-card glass-card"data-category="sql power-bi">
     <div class="project-img">
         <img src="images/Pizza Sales.png" alt="A dashboard visualizing pizza sales data with graphs for daily trends and top-selling pizzas." loading="lazy" style="width:100%; height:100%; object-fit: cover;">
+        <span class="project-category-tag">SQL and Power BI</span>
     </div>
     <div class="project-content">
         <h3>Data-Driven Analysis of Pizza Sales Trends</h3>
@@ -1912,6 +2037,7 @@
     <div class="project-img">
         <!-- পরামর্শ: এখানে তোমার correlation_matrix.png বা অন্য কোনো চার্টের ছবি images ফোল্ডারে রেখে ব্যবহার করতে পারো -->
         <img src="images/Titanic-Project3.png" alt="Visualization from the Titanic dataset analysis showing passenger survival statistics." loading="lazy" style="width:100%; height:100%; object-fit: cover;">
+        <span class="project-category-tag">Python</span>
     </div>
     <div class="project-content">
         <h3>Titanic Survival Prediction: An End-to-End Data Analysis</h3>
@@ -1941,6 +2067,7 @@
 <div class="project-card glass-card"data-category="power-bi">
     <div class="project-img">
         <img src="images/Disney3.png" alt="Disney Dashboard Project" loading="lazy" style="width:100%; height:100%; object-fit: cover;">
+        <span class="project-category-tag">Excel and Power BI</span>
     </div>
     <div class="project-content">
         <h3>Disney/Pixar Box Office & Ratings Performance Tracker</h3>
