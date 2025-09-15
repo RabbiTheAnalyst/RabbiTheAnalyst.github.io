@@ -697,18 +697,20 @@
         color: var(--accent);
     }
 
-    .viz-demo {
-        margin-top: 60px;
-        padding: 30px;
+   .viz-demo {
+    margin-top: 60px;
+    padding: 30px;
+    display: flex; /* এই লাইনটি যোগ করুন */
+    flex-direction: column; /* এই লাইনটি যোগ করুন */
+    align-items: center; /* এবং এই লাইনটি যোগ করুন */
     }
-
     .chart-container {
-        position: relative;
-        height: 400px;
-        width: 100%;
-        margin-bottom: 30px;
-    }
-
+    position: relative;
+    height: 400px;
+    width: 100%;
+    max-width: 600px; /* এই লাইনটি যোগ করুন */
+    margin: 0 auto 30px auto; /* এই লাইনটি পরিবর্তন করুন */
+}
     .contact-content {
         display: flex;
         gap: 50px;
@@ -1052,6 +1054,56 @@
         color: var(--text-primary);
         border-color: var(--accent);
     }
+    .github-activity .github-stats {
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap; /* এই লাইনটি যোগ করুন */
+    gap: 20px; /* এবং এই লাইনটি যোগ করুন */
+    padding: 20px;
+    margin-bottom: 50px;
+}
+
+.github-activity .recent-repos-title {
+    color: var(--text-primary);
+    text-align: center;
+    font-size: 1.8rem;
+    margin-bottom: 30px;
+}
+
+.github-activity .repo-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 25px;
+}
+
+.github-activity .repo-card {
+    background-color: var(--bg-secondary);
+    border: 1px solid var(--border-primary);
+    padding: 25px;
+    border-radius: 15px;
+    transition: all 0.3s ease;
+}
+
+.github-activity .repo-card:hover {
+    transform: translateY(-5px);
+    border-color: var(--accent);
+}
+
+.repo-card h4 {
+    color: var(--text-primary);
+    margin-bottom: 10px;
+}
+
+.repo-card p {
+    font-size: 0.9rem;
+    margin-bottom: 15px;
+}
+
+.repo-card a {
+    color: var(--accent);
+    text-decoration: none;
+    font-weight: 600;
+}
 
     .notification {
         position: fixed;
@@ -1316,6 +1368,53 @@
             padding: 8px 16px;
         }
     }
+    /* === Floating Social Bar CSS === */
+.floating-social-bar {
+    position: fixed; /* এটি স্ক্রিনে এক জায়গায় স্থির থাকবে */
+    top: 50%; /* উপর থেকে মাঝখানে */
+    right: 0; /* ডান দিকে */
+    transform: translateY(-50%); /* ভার্টিক্যালি একদম মাঝখানে আনার জন্য */
+    background: var(--bg-secondary);
+    backdrop-filter: blur(12px);
+    border: 1px solid var(--border-primary);
+    border-right: none; /* ডান দিকের বর্ডার থাকবে না */
+    padding: 15px 10px;
+    border-radius: 20px 0 0 20px; /* শুধু বাম দিকে রাউন্ডেড হবে */
+    display: flex;
+    flex-direction: column; /* আইকনগুলো উপরে-নিচে সাজানো থাকবে */
+    gap: 20px; /* আইকনগুলোর মধ্যে ফাঁকা জায়গা */
+    z-index: 999;
+    box-shadow: -5px 0px 15px rgba(0,0,0,0.1);
+}
+
+.floating-social-bar a {
+    color: var(--text-secondary);
+    transition: all 0.3s ease;
+}
+
+.floating-social-bar a:hover {
+    color: var(--accent);
+    transform: scale(1.2);
+}
+
+.floating-social-bar .contact-link {
+    writing-mode: vertical-rl; /* লেখাকে উলম্বভাবে দেখানোর জন্য */
+    transform: rotate(180deg);
+    font-weight: 600;
+    text-decoration: none;
+    text-transform: uppercase;
+    font-size: 0.9rem;
+    letter-spacing: 1px;
+    padding-top: 15px;
+    border-top: 1px solid var(--border-primary);
+}
+
+/* === Mobile Responsive CSS === */
+@media (max-width: 768px) {
+    .floating-social-bar {
+        display: none; /* মোবাইল স্ক্রিনে বারটি লুকিয়ে যাবে */
+    }
+}
 </style>
 </head>
 <body data-theme="dark">
@@ -1516,66 +1615,8 @@
 
     </div>
     <div class="swiper-pagination"></div>
-    </div>        
-    <div class="skill-bars">
-    <div class="skill-bar">
-        <div class="skill-info">
-            <span class="skill-name">Excel</span>
-            <span class="skill-percentage">85%</span>
-        </div>
-        <div class="skill-progress">
-            <div class="skill-progress-bar" data-width="85%"></div>
-        </div>
-    </div>
-    <div class="skill-bar">
-        <div class="skill-info">
-            <span class="skill-name">Power BI</span>
-            <span class="skill-percentage">88%</span>
-        </div>
-        <div class="skill-progress">
-            <div class="skill-progress-bar" data-width="88%"></div>
-        </div>
-    </div>
-    <div class="skill-bar">
-        <div class="skill-info">
-            <span class="skill-name">SQL</span>
-            <span class="skill-percentage">85%</span>
-        </div>
-        <div class="skill-progress">
-            <div class="skill-progress-bar" data-width="85%"></div>
-        </div>
-    </div>
-    <div class="skill-bar">
-        <div class="skill-info">
-            <span class="skill-name">Python</span>
-            <span class="skill-percentage">80%</span>
-        </div>
-        <div class="skill-progress">
-            <div class="skill-progress-bar" data-width="80%"></div>
-        </div>
-    </div>
-    <div class="skill-bar">
-        <div class="skill-info">
-            <span class="skill-name">PowerPoint</span>
-            <span class="skill-percentage">85%</span>
-        </div>
-        <div class="skill-progress">
-            <div class="skill-progress-bar" data-width="85%"></div>
-        </div>
-    </div>
-    <div class="skill-bar">
-        <div class="skill-info">
-            <span class="skill-name">Canva</span>
-            <span class="skill-percentage">85%</span>
-        </div>
-        <div class="skill-progress">
-            <div class="skill-progress-bar" data-width="85%"></div>
-        </div>
-    </div>
-</div>
-
 <div class="viz-demo glass-card">
-    <h3 style="text-align: center; margin-bottom: 30px; color: var(--text-primary);">Sample Data Visualization</h3>
+    <h3 style="text-align: center; margin-bottom: 30px; color: var(--text-primary);">Skills At a Glance</h3>
     <div class="chart-container">
         <canvas id="skillsChart"></canvas>
     </div>
@@ -1839,6 +1880,32 @@
 </div>   
                 </div>
             </div>
+        <section id="github-activity" class="github-activity">
+    <div class="container reveal">
+        <div class="section-title">
+            <h2>Live from GitHub</h2>
+        </div>
+        <div class="github-stats glass-card">
+            <div class="stat-item">
+                <h3 class="stat-number" id="gh-repos">0</h3>
+                <p class="stat-label">Public Repositories</p>
+            </div>
+            <div class="stat-item">
+                <h3 class="stat-number" id="gh-followers">0</h3>
+                <p class="stat-label">Followers</p>
+            </div>
+            <div class="stat-item">
+                <h3 class="stat-number" id="gh-following">0</h3>
+                <p class="stat-label">Following</p>
+            </div>
+        </div>
+        
+        <h3 class="recent-repos-title">Recently Updated Projects</h3>
+        <div id="gh-repo-list" class="repo-grid">
+            <p>Loading projects...</p>
+        </div>
+    </div>
+</section>
         </section>
         <section id="insights" class="insights">
     <div class="container reveal">
@@ -1970,6 +2037,20 @@
         <div class="container">
             <p>&copy; 2025 RabbiTheAnalyst. All rights reserved.</p>
         </div>
+        <nav class="floating-social-bar">
+    <a href="https://www.linkedin.com/in/rabbi-the-analyst/" target="_blank" rel="noopener noreferrer" title="LinkedIn">
+        <i data-lucide="linkedin"></i>
+    </a>
+    <a href="https://github.com/RabbiTheAnalyst" target="_blank" rel="noopener noreferrer" title="GitHub">
+        <i data-lucide="github"></i>
+    </a>
+    <a href="https://x.com/RabbiTheAnalyst" target="_blank" rel="noopener noreferrer" title="Twitter/X">
+        <i data-lucide="twitter"></i>
+    </a>
+    <a href="#contact" class="contact-link" title="Contact Me">
+        <span>Contact</span>
+    </a>
+</nav>
     </footer>
     <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
     <div id="resumeModal" class="modal">

@@ -211,18 +211,54 @@ var skillSwiper = new Swiper(".skillSwiper", {
 
     // --- Chart.js Skill Chart Creation ---
     let skillsChartInstance;
-    function createSkillsChart() {
-        if (skillsChartInstance) { skillsChartInstance.destroy(); }
-        const ctx = document.getElementById('skillsChart').getContext('2d');
-        skillsChartInstance = new Chart(ctx, {
-            type: 'radar',
-            data: {
-                labels: ['Python', 'SQL', 'Data Visualization', 'Machine Learning', 'Statistical Analysis', 'Excel', 'Data Cleaning'],
-                datasets: [{ label: 'Skill Level', data: [80, 85, 90, 60, 84, 85, 87], backgroundColor: 'rgba(38, 166, 154, 0.2)', borderColor: 'rgba(38, 166, 154, 1)', pointBackgroundColor: 'rgba(38, 166, 154, 1)', pointBorderColor: '#fff', pointHoverBackgroundColor: '#fff', pointHoverBorderColor: 'rgba(38, 166, 154, 1)' }]
-            },
-            options: { scales: { r: { angleLines: { color: 'rgba(255, 255, 255, 0.2)' }, grid: { color: 'rgba(255, 255, 255, 0.2)' }, pointLabels: { color: 'var(--text-primary)', font: { size: 14 } }, ticks: { backdropColor: 'transparent', color: 'var(--text-secondary)' } } }, plugins: { legend: { labels: { color: 'var(--text-primary)' } } } }
-        });
-    }
+    // আপনার পুরনো createSkillsChart ফাংশনটি ডিলেট করে
+// নিচের নতুন ফাংশনটি পেস্ট করুন
+
+function createSkillsChart() {
+    if (skillsChartInstance) { skillsChartInstance.destroy(); }
+    const ctx = document.getElementById('skillsChart').getContext('2d');
+    skillsChartInstance = new Chart(ctx, {
+        type: 'radar',
+        data: {
+            labels: [
+                'Excel', 
+                'Power BI', 
+                'SQL', 
+                'Python', 
+                'Statistical Analysis', 
+                'Machine Learning', 
+                'Data Cleaning',
+                'PowerPoint',
+                'Canva'
+            ],
+            datasets: [{ 
+                label: 'Proficiency Level (out of 100)', 
+                data: [85, 88, 85, 80, 84, 75, 87, 85, 85], // প্রতিটি স্কিলের জন্য আপনার দক্ষতা অনুযায়ী নম্বর দিন
+                backgroundColor: 'rgba(38, 166, 154, 0.2)', 
+                borderColor: 'rgba(38, 166, 154, 1)', 
+                pointBackgroundColor: 'rgba(38, 166, 154, 1)', 
+                pointBorderColor: '#fff', 
+                pointHoverBackgroundColor: '#fff', 
+                pointHoverBorderColor: 'rgba(38, 166, 154, 1)' 
+            }]
+        },
+        options: { 
+            scales: { 
+                r: { 
+                    angleLines: { color: 'rgba(255, 255, 255, 0.2)' }, 
+                    grid: { color: 'rgba(255, 255, 255, 0.2)' }, 
+                    pointLabels: { color: 'var(--text-primary)', font: { size: 14 } }, 
+                    ticks: { backdropColor: 'transparent', color: 'var(--text-secondary)' } 
+                } 
+            }, 
+            plugins: { 
+                legend: { 
+                    labels: { color: 'var(--text-primary)' } 
+                } 
+            } 
+        }
+    });
+}
 
     // --- NEW & ENHANCED CONTACT FORM SCRIPT ---
 const contactForm = document.getElementById('contactForm');
@@ -384,3 +420,58 @@ window.addEventListener('load', () => {
         }
     }, 200); // 200ms delay
 }); 
+// Function to fetch data from GitHub API
+async function fetchGitHubData() {
+    const username = 'RabbiTheAnalyst'; // আপনার GitHub ইউজারনেম এখানে দিন
+    const userApiUrl = `https://api.github.com/users/${username}`;
+    const reposApiUrl = `https://api.github.com/users/${username}/repos?sort=updated&per_page=3`; // সাম্প্রতিক ৩টি রিপো
+
+    try {
+        // Fetch user profile data
+        const userResponse = await fetch(userApiUrl);
+        if (!userResponse.ok) {
+            throw new Error('Network response was not ok for user data');
+        }
+        const userData = await userResponse.json();
+
+        // Display user stats
+        document.getElementById('gh-repos').textContent = userData.public_repos;
+        document.getElementById('gh-followers').textContent = userData.followers;
+        document.getElementById('gh-following').textContent = userData.following;
+
+        // Fetch user repositories data
+        const reposResponse = await fetch(reposApiUrl);
+        if (!reposResponse.ok) {
+            throw new Error('Network response was not ok for repos data');
+        }
+        const reposData = await reposResponse.json();
+        
+        // Display recent repositories
+        const repoList = document.getElementById('gh-repo-list');
+        repoList.innerHTML = ''; // Clear "Loading..." text
+
+        reposData.forEach(repo => {
+            const repoCard = document.createElement('div');
+            repoCard.className = 'repo-card';
+            
+            repoCard.innerHTML = `
+                <h4>${repo.name}</h4>
+                <p>${repo.description || 'No description available.'}</p>
+                <a href="${repo.html_url}" target="_blank" rel="noopener noreferrer">View Project →</a>
+            `;
+            
+            repoList.appendChild(repoCard);
+        });
+
+    } catch (error) {
+        console.error('There was a problem with the fetch operation:', error);
+        document.getElementById('gh-repo-list').innerHTML = '<p>Could not fetch GitHub data. Please try again later.</p>';
+    }
+}
+
+// Call the function when the page loads
+document.addEventListener('DOMContentLoaded', fetchGitHubData);
+
+// ✅✅✅ ঠিক এইখানে নিচের লাইনটি যোগ করুন ✅✅✅
+        lucide.createIcons();
+
