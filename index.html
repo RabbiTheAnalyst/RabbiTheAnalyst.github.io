@@ -3,7 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Rabbi | RabbiTheAnalyst Portfolio</title>
+    <title>RabbiTheAnalyst</title>
+    <link rel="icon" type="image/png" href="images/logo-dark1.png">
     <script src="https://unpkg.com/lucide@latest"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -931,14 +932,26 @@
         width: 18px;
     }
 
-    .swiper-pagination-bullet {
-        background-color: var(--text-secondary);
-    }
+    /* ✅✅✅ নিচের নতুন কোডটুকু বসিয়ে দিন ✅✅✅ */
 
-    .swiper-pagination-bullet-active {
-        background-color: var(--accent);
-    }
+/* === All Slider Pagination Dots === */
+.mySwiper .swiper-pagination-bullet,
+.skillSwiper .swiper-pagination-bullet {
+    width: 10px;
+    height: 10px;
+    background-color: var(--text-secondary);
+    opacity: 0.5;
+    border-radius: 50px;
+    transition: all 0.4s ease;
+}
 
+.mySwiper .swiper-pagination-bullet-active,
+.skillSwiper .swiper-pagination-bullet-active {
+    width: 35px;
+    background: var(--accent);
+    opacity: 1;
+    border-radius: 50px;
+}
     .swiper-button-next,
     .swiper-button-prev {
         color: var(--accent);
@@ -962,6 +975,10 @@
         font-size: 1.2rem;
         font-weight: 900;
     }
+    /* ✅✅✅ নিচের CSS কোডটুকু যোগ করুন ✅✅✅ */
+.skillSwiper {
+    margin-bottom: 60px; /* স্কিল স্লাইডার এবং চার্টের মধ্যে সুন্দর একটি দূরত্ব তৈরি করবে */
+}
     
     /* === Modified Skills Slider CSS === */
     .skillSwiper .skill-card.glass-card {
